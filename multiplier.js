@@ -4,21 +4,19 @@
 
 
 
-function Multiplier(numberSupplied){
-    this.currentValue = 1;
+function Multiplier(numberSupplied){   // creates object Multiplier with numberSupplied parameter
+    this.currentValue = 1;        
     this.numberSupplied = numberSupplied;
-    
-
-    this.getCurrentValue = function() {
+    this.getCurrentValue = function() {  // method getCurrent value returns the current value
         return this.currentValue;
     }
 
-    this.multiply = function() {
+    this.multiply = function() {   // method multiply returns the current value which is the current value times number supplied
         this.currentValue  = (this.currentValue * this.numberSupplied);
     }
 }
 
-var myMultiplier = new Multiplier(15);
+var myMultiplier = new Multiplier(15);     
 
 myMultiplier.multiply();
 myMultiplier.getCurrentValue();
@@ -33,7 +31,7 @@ myMultiplier.getCurrentValue();
 // the location the photo was taken in as strings.
 
 
-function Photo(name,location){
+function Photo(name,location){    // create Photo object with name and location arguments
     this.name = name;
     this.location = location;
 
@@ -42,22 +40,22 @@ function Photo(name,location){
     }
 }
 
-function Album(){
+function Album(){     // album object that holds all the photos and photos array
  var fishPhoto = new Photo("Brooke trout", "Uintah Moutains");
  var bearPhoto = new Photo("Grizzly bear", "Missoula, MT");
  var eaglePhoto = new Photo("Bald Eagle", "Big Bear Mountain, CA");
  var carPhoto = new Photo("Supra", "Salt Lake City, UT");
  var photos = [fishPhoto, bearPhoto, eaglePhoto, carPhoto];
  var index = 0;
-
- this.addToPhotos = function(photo){
+ 
+ this.addToPhotos = function(photo){  //add a photo by pushing it to the photos array
  	photos.push(photo); 
  }
 
- this.listAllPhotos = function(){
+ this.listAllPhotos = function(){  // lists all the photos
  	return photos.toString();
  }
-
+  //return name of photo found at the given index of the photo array
  this.getPhoto = function(index){
  	return photos[index].toString();
  }
@@ -82,12 +80,12 @@ album.listAllPhotos();
 
 
 
-var Person = function(name){
-  this.name = name;
+var Person = function(name){  // Person object with name argument
+  this.name = name;       // instances of Person
   this.type = 'human';
   }
 
-Person.prototype.toString = function(){
+Person.prototype.toString = function(){  // Person prototype
   console.log("Name:", this.name, "Type:", this.type);
 }
 
@@ -95,50 +93,50 @@ Person.prototype.info = function(){
   console.log("Name:", this.name, "Type:", this.type);
 }
 
-var Student = function(name){
+var Student = function(name){  // Student object 
   Person.apply(this,arguments)
   this.name = name;
   this.type = 'student';
 
-  this.study = function(){
-    console.log("I'm studying");
+  this.study = function(){   // method to describe what a student does
+    console.log("I'm learning!");
   }
 }
 
-Student.prototype = Person.prototype;        
+Student.prototype = Person.prototype;     // student prototype   
 Student.prototype.constructor = Student;  
 
 Person.prototype.info = function(){
   console.log("Name:", this.name, "Type:", this.type);
 }
 
-var Teacher = function(name){
+var Teacher = function(name){  // Teacher object 
   Person.apply(this,arguments)
-  this.name = name;
+  this.name = name;       // instances of Teacher
   this.type = "teacher";
 
-  this.teach = function(){
-  console.log("I'm teaching");
+  this.teach = function(){     // method to describe what a teacher does
+  console.log("I'm teaching!");
   }
 }
 
-Teacher.prototype = Person.prototype;
+Teacher.prototype = Person.prototype;  // teacher prototype
 Teacher.prototype.constructor = Teacher; 
 
-var School = function(){
-  this.students = [];
-  this.teachers = [];
+var School = function(){   // School object 
+  this.students = [];     // student instance
+  this.teachers = [];     // teacher instance
 
-  this.addStudent = function(student){
+  this.addStudent = function(student){   // add Student
     this.students.push(student); 
   }
-  this.addTeacher = function(teacher){
+  this.addTeacher = function(teacher){  // add Teacher
     this.teachers.push(teacher);
   }
-  this.listAllStudents = function(){
+  this.listAllStudents = function(){  // lists all Students
   return this.students.toString();
   }
-  this.listAllTeachers = function(){
+  this.listAllTeachers = function(){  // list all Teachers
   return this.teachers.toString();
   }
 
