@@ -34,41 +34,45 @@ myMultiplier.getCurrentValue();
 function Photo(name,location){    // create Photo object with name and location arguments
     this.name = name;
     this.location = location;
-
-    this.toString = function(){
-    	return this.name;
-    }
-}
+};
 
 function Album(){     // album object that holds all the photos and photos array
- var fishPhoto = new Photo("Brooke trout", "Uintah Moutains");
- var bearPhoto = new Photo("Grizzly bear", "Missoula, MT");
- var eaglePhoto = new Photo("Bald Eagle", "Big Bear Mountain, CA");
- var carPhoto = new Photo("Supra", "Salt Lake City, UT");
- var photos = [fishPhoto, bearPhoto, eaglePhoto, carPhoto];
- var index = 0;
- 
- this.addToPhotos = function(photo){  //add a photo by pushing it to the photos array
- 	photos.push(photo); 
- }
+    this.photos = [];
+    this.addToPhotos = function(photo){  //add a photo by pushing it to the photos array
+      this.photos.push(photo)
+ };
 
  this.listAllPhotos = function(){  // lists all the photos
- 	return photos.toString();
+ 	  var pictures = ''; 
+    for (var i = 0; i < this.photos.length; i++){
+      if (i === 0){
+        pictures += this.photos[i].name;
+      } else {
+        pictures += ', ' + this.photos[i].name;
+      }
+    }
+    return pictures;
  }
   //return name of photo found at the given index of the photo array
  this.getPhoto = function(index){
- 	return photos[index].toString();
+ 	return this.photos[index];
  }
 
 };
 
-//instantiate the object
-var album = new Album();
-album.listAllPhotos();
-album.addToPhotos(new Photo("test", "Kaysville"));
-album.getPhoto(2);
-album.listAllPhotos();
+ var fishPhoto = new Photo("Brooke trout", "Uintah Moutains");
+ var bearPhoto = new Photo("Grizzly bear", "Missoula, MT");
+ var eaglePhoto = new Photo("Bald Eagle", "Big Bear Mountain, CA");
+ var carPhoto = new Photo("Supra", "Salt Lake City, UT");
+ var album1 = new Album();
+//call the functions
+album1.addToPhotos(fishPhoto);
+album1.addToPhotos(bearPhoto);
+album1.addToPhotos(eaglePhoto);
+album1.addToPhotos(carPhoto);
 
+console.log(album1.listAllPhotos());
+console.log(album1.getPhoto(2));
 
 
 // Create a prototypical Person object. From this object, extend a Teacher object 
@@ -80,84 +84,32 @@ album.listAllPhotos();
 
 
 
-var Person = function(name){  // Person object with name argument
-  this.name = name;       // instances of Person
-  this.type = 'human';
-  }
+function Person(name, sex){  // Person object with name and sex arguement
+  this.name = name;       
+  this.sex = sex;          
+};
 
-Person.prototype.toString = function(){  // Person prototype
-  console.log("Name:", this.name, "Type:", this.type);
-}
+function Teacher(name, sex, course){
+  Person.call(this, name, sex); // inherits Person parameters
+  this.course = course;
+};
 
-Person.prototype.info = function(){
-  console.log("Name:", this.name, "Type:", this.type);
-}
+function Student(name, sex, age){  // Student object 
+  Person.call(this, name, sex);   // inherits Person parameters
+  this.age = age;
+};
+  
+function School(){   // school object with instances of student and teacher
+  this.student1 = new Student('Jamie', 'Female', '21');
+  this.teacher1 = new Teacher('Robert', 'Male', 'History 1050');
+};
 
-var Student = function(name){  // Student object 
-  Person.apply(this,arguments)
-  this.name = name;
-  this.type = 'student';
+// instance of school
+var school1 = new School();
 
-  this.study = function(){   // method to describe what a student does
-    console.log("I'm learning!");
-  }
-}
-
-Student.prototype = Person.prototype;     // student prototype   
-Student.prototype.constructor = Student;  
-
-Person.prototype.info = function(){
-  console.log("Name:", this.name, "Type:", this.type);
-}
-
-var Teacher = function(name){  // Teacher object 
-  Person.apply(this,arguments)
-  this.name = name;       // instances of Teacher
-  this.type = "teacher";
-
-  this.teach = function(){     // method to describe what a teacher does
-  console.log("I'm teaching!");
-  }
-}
-
-Teacher.prototype = Person.prototype;  // teacher prototype
-Teacher.prototype.constructor = Teacher; 
-
-var School = function(){   // School object 
-  this.students = [];     // student instance
-  this.teachers = [];     // teacher instance
-
-  this.addStudent = function(student){   // add Student
-    this.students.push(student); 
-  }
-  this.addTeacher = function(teacher){  // add Teacher
-    this.teachers.push(teacher);
-  }
-  this.listAllStudents = function(){  // lists all Students
-  return this.students.toString();
-  }
-  this.listAllTeachers = function(){  // list all Teachers
-  return this.teachers.toString();
-  }
-
-}
-
-school = new School();
-student = new Student("Henry");
-student2 = new Student("Hank");
-school.addStudent(student);
-school.addStudent(student2);
-teacher = new Teacher("Patricia");
-teacher2 = new Teacher("Tammy");
-school.addTeacher(teacher);
-school.addTeacher(teacher2);
-
-school.listAllStudents();
-student2.study();
-school.listAllTeachers();
-teacher2.teach();
-
-
+// instances of student ad teacher
+console.log(school1.student1);
+console.log(school1.teacher1);
 
 
 
